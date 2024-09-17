@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test
 
 class GameWithDumbRobotTest {
     @Test
-    fun `robot moves`() {
+    fun `robot moves to the right`() {
         val result =
             moveRobot(
                 """
@@ -19,6 +19,26 @@ class GameWithDumbRobotTest {
         result shouldBe
             """
             .R.
+            ...
+            ...
+            """.trimIndent()
+    }
+
+    @Test
+    fun `robot moves to the left`() {
+        val result =
+            moveRobot(
+                """
+                .R.
+                ...
+                ...
+                """.trimIndent(),
+                "R",
+            )
+
+        result shouldBe
+                """
+            R..
             ...
             ...
             """.trimIndent()

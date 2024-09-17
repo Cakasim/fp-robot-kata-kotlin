@@ -4,4 +4,8 @@ package com.finmid.fp.kata
 fun moveRobot(
     textMap: String,
     moveCommands: String,
-): String = textMap
+) = serialiseMap(
+    parseMap(textMap).let {
+        it.copy(robot = Position(it.robot.x + 1, it.robot.y))
+    }
+)
