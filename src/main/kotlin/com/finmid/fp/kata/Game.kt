@@ -11,13 +11,14 @@ fun moveRobot(
     }
 )
 
-fun moveNextPosition(robotPosition: Position, direction: Direction) = when (direction) {
+private fun moveNextPosition(robotPosition: Position, direction: Direction) = when (direction) {
     LEFT -> robotPosition.moveLeft()
     RIGHT -> robotPosition.moveRight()
     DOWN -> robotPosition.moveDown()
-    else -> TODO()
+    UP -> robotPosition.moveUp()
 }
 
-fun Position.moveRight() = Position(x + 1, y)
-fun Position.moveLeft() = Position(x - 1, y)
-fun Position.moveDown() = Position(x, y + 1)
+private fun Position.moveRight() = Position(x + 1, y)
+private fun Position.moveLeft() = Position(x - 1, y)
+private fun Position.moveDown() = Position(x, y + 1)
+private fun Position.moveUp() = Position(x, y - 1)
