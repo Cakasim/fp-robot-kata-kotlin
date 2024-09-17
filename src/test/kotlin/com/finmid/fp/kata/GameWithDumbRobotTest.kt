@@ -219,4 +219,24 @@ class GameWithDumbRobotTest {
             ...
             """.trimIndent()
     }
+
+    @Test
+    fun `robot moves and hits the tree and continues if more commands`() {
+        val result =
+            moveRobot(
+                """
+                R..
+                .T.
+                ...
+                """.trimIndent(),
+                "RDRDD",
+            )
+
+        result shouldBe
+                """
+            ...
+            .T.
+            ..R
+            """.trimIndent()
+    }
 }

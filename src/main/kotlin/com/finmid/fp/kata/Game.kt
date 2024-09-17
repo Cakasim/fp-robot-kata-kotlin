@@ -10,18 +10,27 @@ fun moveRobot(
     moveCommands: String,
 ) = serialiseMap(
     parseMap(textMap).let { map ->
-        parseCommands(moveCommands).fold(map) { currMap, cmd ->
-            currMap.copy(robot = currMap.moveNextPosition(cmd))
+        parseCommands(moveCommands).fold(map) { currentMap, direction ->
+            currentMap.moveNext(direction)
         }
     }
 )
 
-private fun Map.moveNextPosition(direction: Direction) = when (direction) {
+private fun Map.moveNext(direction: Direction) =
+    if (this.resolveNextPosition(direction).hasCollision(obstacles)) {
+        this
+    } else {
+        copy(robot = resolveNextPosition(direction))
+    }
+
+private fun Map.resolveNextPosition(direction: Direction) = when (direction) {
     LEFT -> robot.tryMoveLeft()
     RIGHT -> robot.tryMoveRight(width)
     DOWN -> robot.tryMoveDown(height)
     UP -> robot.tryMoveUp()
 }
+
+private fun Position.hasCollision(trees: List<Position>) = this in trees
 
 private fun Position.moveRight() = Position(x + 1, y)
 private fun Position.moveLeft() = Position(x - 1, y)
