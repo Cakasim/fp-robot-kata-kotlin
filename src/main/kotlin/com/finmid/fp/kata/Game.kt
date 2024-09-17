@@ -17,8 +17,14 @@ fun moveRobot(
 )
 
 private fun Map.moveNext(direction: Direction) =
-    if (this.resolveNextPosition(direction).hasCollision(obstacles)) {
-        this
+    if (resolveNextPosition(direction).hasCollision(obstacles)) {
+        if (resolveNextPosition(RIGHT).hasCollision(obstacles)) {
+            this
+        } else {
+            listOf(RIGHT, DOWN, DOWN, LEFT).fold(this) { currMap, dir ->
+                currMap.copy(robot = currMap.resolveNextPosition(dir))
+            }
+        }
     } else {
         copy(robot = resolveNextPosition(direction))
     }
