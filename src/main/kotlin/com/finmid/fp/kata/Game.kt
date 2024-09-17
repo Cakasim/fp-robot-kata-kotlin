@@ -9,8 +9,10 @@ fun moveRobot(
     textMap: String,
     moveCommands: String,
 ) = serialiseMap(
-    parseMap(textMap).let {
-        it.copy(robot = it.moveNextPosition(parseCommands(moveCommands).first()))
+    parseMap(textMap).let { map ->
+        parseCommands(moveCommands).fold(map) { currMap, cmd ->
+            currMap.copy(robot = currMap.moveNextPosition(cmd))
+        }
     }
 )
 
