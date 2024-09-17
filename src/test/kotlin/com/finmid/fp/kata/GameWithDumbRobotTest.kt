@@ -112,13 +112,32 @@ class GameWithDumbRobotTest {
                 ...
                 ...
                 """.trimIndent(),
-                "L",
+                "R",
             )
 
         result shouldBe """
             ..R
             ...
             ...
+            """.trimIndent()
+    }
+
+    @Test
+    fun `given robot tries to move down without space should stay on place`() {
+        val result =
+            moveRobot(
+                """
+                ...
+                ...
+                R..
+                """.trimIndent(),
+                "D",
+            )
+
+        result shouldBe """
+            ...
+            ...
+            R..
             """.trimIndent()
     }
 
