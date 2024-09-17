@@ -17,7 +17,7 @@ fun moveRobot(
 private fun Map.moveNextPosition(direction: Direction) = when (direction) {
     LEFT -> robot.tryMoveLeft()
     RIGHT -> robot.tryMoveRight(width)
-    DOWN -> robot.moveDown()
+    DOWN -> robot.tryMoveDown(height)
     UP -> robot.moveUp()
 }
 
@@ -28,6 +28,8 @@ private fun Position.moveUp() = Position(x, y - 1)
 
 private fun Position.canMoveLeft() = x > 0
 private fun Position.canMoveRight(width: Int) = x < width - 1
+private fun Position.canMoveDown(height: Int) = y < height - 1
 
 private fun Position.tryMoveLeft() = if (canMoveLeft()) moveLeft() else this
 private fun Position.tryMoveRight(width: Int) = if (canMoveRight(width)) moveRight() else this
+private fun Position.tryMoveDown(height: Int) = if (canMoveDown(height)) moveDown() else this
