@@ -57,9 +57,29 @@ class GameWithDumbRobotTest {
             )
 
         result shouldBe
-                """
+            """
             ...
             R..
+            ...
+            """.trimIndent()
+    }
+
+    @Test
+    fun `robot moves to the up`() {
+        val result =
+            moveRobot(
+                """
+                ...
+                R..
+                ...
+                """.trimIndent(),
+                "U",
+            )
+
+        result shouldBe
+            """
+            R..
+            ...
             ...
             """.trimIndent()
     }

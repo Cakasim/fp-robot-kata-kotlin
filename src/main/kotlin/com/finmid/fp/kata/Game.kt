@@ -1,5 +1,7 @@
 package com.finmid.fp.kata
 
+import com.finmid.fp.kata.Direction.*
+
 fun moveRobot(
     textMap: String,
     moveCommands: String,
@@ -10,7 +12,12 @@ fun moveRobot(
 )
 
 fun moveNextPosition(robotPosition: Position, direction: Direction) = when (direction) {
-    Direction.LEFT -> Position(robotPosition.x - 1, robotPosition.y)
-    Direction.RIGHT -> Position(robotPosition.x + 1, robotPosition.y)
+    LEFT -> robotPosition.moveLeft()
+    RIGHT -> robotPosition.moveRight()
+    DOWN -> robotPosition.moveDown()
     else -> TODO()
 }
+
+fun Position.moveRight() = Position(x + 1, y)
+fun Position.moveLeft() = Position(x - 1, y)
+fun Position.moveDown() = Position(x, y + 1)
